@@ -2,11 +2,15 @@ version: '3'
 
 services:
   node:
-    image: node:17.4-alpine3.14
+    build: 
+      context: .
+      dockerfile: docker/Dockerfile
     tty: true
     volumes:
       - .:/src
     working_dir: "/src"
     ports:
-      - 3000:3000
-    command: npm start
+      - 8080:8080
+    command: >
+      sh -c "npm run build &&
+             npm start"
